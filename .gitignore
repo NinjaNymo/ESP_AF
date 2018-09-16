@@ -6,3 +6,5 @@ build/
 Hardware/ESP_AF/History/
 
 Hardware/ESP_AF/__Previews/
+
+*.LOG
