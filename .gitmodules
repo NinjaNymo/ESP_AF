@@ -1,0 +1,3 @@
+[submodule "Hardware/AltiumLib"]
+	path = Hardware/AltiumLib
+	url = https://github.com/ninjanymo/AltiumLib
