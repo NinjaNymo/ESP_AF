@@ -1,0 +1,18 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 13:33:36 On 2018-11-21
+
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of PCB Document [forEtch.PcbDoc]
+   Generated File[forEtch.GTL]
+   Generated File[forEtch.GBL]
+   Generated File[forEtch.RUL]
+   Generated File[forEtch.EXTREP]
+   Generated File[forEtch.REP]
+
+
+Files Generated   : 5
+Documents Printed : 0
+
+Finished Output Generation At 13:33:36 On 2018-11-21

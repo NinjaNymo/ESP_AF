@@ -1,0 +1,48 @@
+*************************************************************
+FileName = forEtch.GBR
+AutoAperture = True
+*************************************************************
+Generating : TC
+      File : forEtch.GTL
+
+    Adding Layer      : TC
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+*************************************************************
+
+*************************************************************
+Generating : BC
+      File : forEtch.GBL
+
+    Adding Layer      : BC
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D12
+    D24
+    D25
+    D26
+    D27
+*************************************************************
+
