@@ -1,0 +1,725 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2018-11-21</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">12:26:08</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc" class="file"><acronym title="C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc">C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">127</td></tr>
+</table>
+</td>
+</table><a name="IDDRXHX0Z1IGRZJ4RAOZMUVEGPQCPQM5UOTR2VHVJD3QMVKBF5ZZAH"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCMCCNYUSZGDLYMB3M0VFPF2K4U43BIJ3FIEYLHOICLNSOIBTCJ">Clearance Constraint (Gap=0mm) (IsText),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3OK5FOI2WI5OLMR0S3C0NAEQFMDK5U4LJA13D4IYZXBVJHRJ411D">Clearance Constraint (Gap=0.4mm) (All),(InPolygon)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID05TZBO4GKIBZODJAC0W04BO4DHEFZ0UGPVSG5UIDKA1SGGSMOHM">Clearance Constraint (Gap=0.25mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2RZMUQARPY54MQRHDQ3ZPR05PBR1WWUXTAASALBCNI44B3SHAWRN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5GEA300LF5DKJZWWPVIIZ5EQDDFD5QZEWMS123PMUOOVI4HGCG1I">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZHAWTLYCAINSJF5DQDIOBOJ0HFYWSZX4NZZEHJJEDTAW3TAREVDH">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMMMBK2MYXOWHPXFCZSLAMKXZOMQHJ4H12NWQEAC3BUM4J3E0H34N">Width Constraint (Min=0.25mm) (Max=2mm) (Preferred=0.4mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSNTQEKMZPSOMJABP0UG1LSXN2LPKTA0GCXAAJNJV1NJVNIZY4MUD">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJXNTO4MPUAKMLFE4Q5MXNCUXKDC2YEQIOMOKPDGKGUJ0ZWUFASND">Hole Size Constraint (Min=0.025mm) (Max=5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3XHCFOXLFEEJMY51QS1GMQWSNFAB45MJTAC4EZDKRLGCQ5PLTELM">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOZNCRGT2BJHGLXYSACBFIILHENAW3ANSZ0MZCZMG52DW5WPQ0K5I">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">49</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAL4CR42X1BYDJ5OGWQOSXPUKUPTPW0L02323JJHFVBZ3QTQMSTHN">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">75</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOOPVPBOKQSWSM35W4VP5RBPDWK05I1GU5O1CJPOOHOSZBLLCUQ0G">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBX1V03FRJMGVETAUP0M4AR5ZRMEXSNTYIAL5NVLLZQ3JPNZYEDDF">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZYPCUBRCOEEENM2AU3D4FK4BTH3VN23EP01M1FN4I0TA0YSSAS2C">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">127</td>
+</tr>
+</table><br><a name="IDOZNCRGT2BJHGLXYSACBFIILHENAW3ANSZ0MZCZMG52DW5WPQ0K5I"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3878.824mil|Location2.Y=3890.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3878.824mil|Location2.Y=3890.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-37(27mm,47.23mm) on TC And Pad U3-38(27mm,48.5mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3828.824mil|Location2.Y=3840.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3828.824mil|Location2.Y=3840.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-36(27mm,45.96mm) on TC And Pad U3-37(27mm,47.23mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3778.824mil|Location2.Y=3790.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3778.824mil|Location2.Y=3790.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-35(27mm,44.69mm) on TC And Pad U3-36(27mm,45.96mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3728.824mil|Location2.Y=3740.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3728.824mil|Location2.Y=3740.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-34(27mm,43.42mm) on TC And Pad U3-35(27mm,44.69mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3678.824mil|Location2.Y=3690.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3678.824mil|Location2.Y=3690.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-33(27mm,42.15mm) on TC And Pad U3-34(27mm,43.42mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3628.824mil|Location2.Y=3640.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3628.824mil|Location2.Y=3640.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-32(27mm,40.88mm) on TC And Pad U3-33(27mm,42.15mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3578.824mil|Location2.Y=3590.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3578.824mil|Location2.Y=3590.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-31(27mm,39.61mm) on TC And Pad U3-32(27mm,40.88mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3528.824mil|Location2.Y=3540.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3528.824mil|Location2.Y=3540.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-30(27mm,38.34mm) on TC And Pad U3-31(27mm,39.61mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3478.824mil|Location2.Y=3490.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3478.824mil|Location2.Y=3490.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-29(27mm,37.07mm) on TC And Pad U3-30(27mm,38.34mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3428.824mil|Location2.Y=3440.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3428.824mil|Location2.Y=3440.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-28(27mm,35.8mm) on TC And Pad U3-29(27mm,37.07mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3378.824mil|Location2.Y=3390.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3378.824mil|Location2.Y=3390.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-27(27mm,34.53mm) on TC And Pad U3-28(27mm,35.8mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3328.824mil|Location2.Y=3340.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3328.824mil|Location2.Y=3340.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-26(27mm,33.26mm) on TC And Pad U3-27(27mm,34.53mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3278.824mil|Location2.Y=3290.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4013.997mil|Location2.X=4025.247mil|Location1.Y=3278.824mil|Location2.Y=3290.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-25(27mm,31.99mm) on TC And Pad U3-26(27mm,33.26mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3922.721mil|Location2.X=3933.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3922.721mil|Location2.X=3933.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-23(22.945mm,30.99mm) on TC And Pad U3-24(24.215mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3872.721mil|Location2.X=3883.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3872.721mil|Location2.X=3883.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-22(21.675mm,30.99mm) on TC And Pad U3-23(22.945mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3822.721mil|Location2.X=3833.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3822.721mil|Location2.X=3833.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-21(20.405mm,30.99mm) on TC And Pad U3-22(21.675mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3772.721mil|Location2.X=3783.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3772.721mil|Location2.X=3783.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-20(19.135mm,30.99mm) on TC And Pad U3-21(20.405mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.721mil|Location2.X=3733.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.721mil|Location2.X=3733.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-19(17.865mm,30.99mm) on TC And Pad U3-20(19.135mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3672.721mil|Location2.X=3683.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3672.721mil|Location2.X=3683.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-18(16.595mm,30.99mm) on TC And Pad U3-19(17.865mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3622.721mil|Location2.X=3633.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3622.721mil|Location2.X=3633.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-17(15.325mm,30.99mm) on TC And Pad U3-18(16.595mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3572.721mil|Location2.X=3583.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3572.721mil|Location2.X=3583.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-16(14.055mm,30.99mm) on TC And Pad U3-17(15.325mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.721mil|Location2.X=3533.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.721mil|Location2.X=3533.971mil|Location1.Y=3171.084mil|Location2.Y=3182.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-15(12.785mm,30.99mm) on TC And Pad U3-16(14.055mm,30.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3278.824mil|Location2.Y=3290.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3278.824mil|Location2.Y=3290.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-13(10mm,33.26mm) on TC And Pad U3-14(10mm,31.99mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3328.824mil|Location2.Y=3340.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3328.824mil|Location2.Y=3340.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-12(10mm,34.53mm) on TC And Pad U3-13(10mm,33.26mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3378.824mil|Location2.Y=3390.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3378.824mil|Location2.Y=3390.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-11(10mm,35.8mm) on TC And Pad U3-12(10mm,34.53mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3428.824mil|Location2.Y=3440.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3428.824mil|Location2.Y=3440.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-10(10mm,37.07mm) on TC And Pad U3-11(10mm,35.8mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3478.824mil|Location2.Y=3490.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3478.824mil|Location2.Y=3490.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-9(10mm,38.34mm) on TC And Pad U3-10(10mm,37.07mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3528.824mil|Location2.Y=3540.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3528.824mil|Location2.Y=3540.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-8(10mm,39.61mm) on TC And Pad U3-9(10mm,38.34mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3578.824mil|Location2.Y=3590.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3578.824mil|Location2.Y=3590.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-7(10mm,40.88mm) on TC And Pad U3-8(10mm,39.61mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3628.824mil|Location2.Y=3640.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3628.824mil|Location2.Y=3640.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-6(10mm,42.15mm) on TC And Pad U3-7(10mm,40.88mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3678.824mil|Location2.Y=3690.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3678.824mil|Location2.Y=3690.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-5(10mm,43.42mm) on TC And Pad U3-6(10mm,42.15mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3728.824mil|Location2.Y=3740.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3728.824mil|Location2.Y=3740.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-4(10mm,44.69mm) on TC And Pad U3-5(10mm,43.42mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3778.824mil|Location2.Y=3790.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3778.824mil|Location2.Y=3790.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-3(10mm,45.96mm) on TC And Pad U3-4(10mm,44.69mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3828.824mil|Location2.Y=3840.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3828.824mil|Location2.Y=3840.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-2(10mm,47.23mm) on TC And Pad U3-3(10mm,45.96mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3878.824mil|Location2.Y=3890.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.706mil|Location2.X=3355.956mil|Location1.Y=3878.824mil|Location2.Y=3890.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Pad U3-1(10mm,48.5mm) on TC And Pad U3-2(10mm,47.23mm) on TC [Top Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.056mil|Location2.X=4619.306mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.056mil|Location2.X=4619.306mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-2(41.237mm,39.825mm) on TC And Pad U4-1(40.738mm,39.825mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4627.741mil|Location2.X=4638.991mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4627.741mil|Location2.X=4638.991mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-3(41.738mm,39.825mm) on TC And Pad U4-2(41.237mm,39.825mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4647.426mil|Location2.X=4658.676mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4647.426mil|Location2.X=4658.676mil|Location1.Y=3547.462mil|Location2.Y=3558.712mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-4(42.237mm,39.825mm) on TC And Pad U4-3(41.738mm,39.825mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4647.426mil|Location2.X=4658.676mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4647.426mil|Location2.X=4658.676mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-6(41.738mm,42.175mm) on TC And Pad U4-5(42.237mm,42.175mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4627.741mil|Location2.X=4638.991mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4627.741mil|Location2.X=4638.991mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-7(41.237mm,42.175mm) on TC And Pad U4-6(41.738mm,42.175mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.056mil|Location2.X=4619.306mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.056mil|Location2.X=4619.306mil|Location1.Y=3639.981mil|Location2.Y=3651.231mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad U4-8(40.738mm,42.175mm) on TC And Pad U4-7(41.237mm,42.175mm) on TC [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4880.202mil|Location2.X=4891.452mil|Location1.Y=3550.414mil|Location2.Y=3561.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4880.202mil|Location2.X=4891.452mil|Location1.Y=3550.414mil|Location2.Y=3561.664mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U5-5(47.5mm,39.9mm) on TC And Pad U5-6(48.3mm,39.9mm) on TC [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4848.706mil|Location2.X=4859.956mil|Location1.Y=3550.414mil|Location2.Y=3561.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4848.706mil|Location2.X=4859.956mil|Location1.Y=3550.414mil|Location2.Y=3561.664mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U5-4(46.7mm,39.9mm) on TC And Pad U5-5(47.5mm,39.9mm) on TC [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4848.706mil|Location2.X=4859.956mil|Location1.Y=3637.029mil|Location2.Y=3648.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4848.706mil|Location2.X=4859.956mil|Location1.Y=3637.029mil|Location2.Y=3648.279mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U5-2(47.5mm,42.1mm) on TC And Pad U5-3(46.7mm,42.1mm) on TC [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4880.202mil|Location2.X=4891.452mil|Location1.Y=3637.029mil|Location2.Y=3648.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4880.202mil|Location2.X=4891.452mil|Location1.Y=3637.029mil|Location2.Y=3648.279mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U5-1(48.3mm,42.1mm) on TC And Pad U5-2(47.5mm,42.1mm) on TC [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3548.509mil|Location2.Y=3559.759mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3548.509mil|Location2.Y=3559.759mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.19mm &lt; 0.254mm) Between Pad J1-4(4mm,39.15mm) on BC And Pad J1-5(4mm,39.8mm) on BC [Bottom Solder] Mask Sliver [0.19mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3522.918mil|Location2.Y=3534.168mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3522.918mil|Location2.Y=3534.168mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.19mm &lt; 0.254mm) Between Pad J1-3(4mm,38.5mm) on BC And Pad J1-4(4mm,39.15mm) on BC [Bottom Solder] Mask Sliver [0.19mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3497.328mil|Location2.Y=3508.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3497.328mil|Location2.Y=3508.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.19mm &lt; 0.254mm) Between Pad J1-2(4mm,37.85mm) on BC And Pad J1-3(4mm,38.5mm) on BC [Bottom Solder] Mask Sliver [0.19mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3471.737mil|Location2.Y=3482.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3124.099mil|Location2.X=3135.349mil|Location1.Y=3471.737mil|Location2.Y=3482.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.19mm &lt; 0.254mm) Between Pad J1-1(4mm,37.2mm) on BC And Pad J1-2(4mm,37.85mm) on BC [Bottom Solder] Mask Sliver [0.19mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDAL4CR42X1BYDJ5OGWQOSXPUKUPTPW0L02323JJHFVBZ3QTQMSTHN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4264.06mil|Location2.X=4275.31mil|Location1.Y=3924.454mil|Location2.Y=3935.704mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4264.06mil|Location2.X=4275.31mil|Location1.Y=3924.454mil|Location2.Y=3935.704mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.198mm &lt; 0.254mm) Between Track (32.25mm,49.25mm)(32.25mm,49.75mm) on TO And Pad J3-1(32.11mm,48.29mm) on TC [TO] to [Top Solder] clearance [0.198mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4382.17mil|Location2.X=4393.42mil|Location1.Y=3765.871mil|Location2.Y=3777.121mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4382.17mil|Location2.X=4393.42mil|Location1.Y=3765.871mil|Location2.Y=3777.121mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.238mm &lt; 0.254mm) Between Track (35.25mm,44.25mm)(35.25mm,44.75mm) on TO And Pad J3-2(35.39mm,45.75mm) on TC [TO] to [Top Solder] clearance [0.238mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4382.17mil|Location2.X=4393.42mil|Location1.Y=3825.241mil|Location2.Y=3836.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4382.17mil|Location2.X=4393.42mil|Location1.Y=3825.241mil|Location2.Y=3836.491mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.238mm &lt; 0.254mm) Between Track (35.25mm,46.75mm)(35.25mm,49.75mm) on TO And Pad J3-2(35.39mm,45.75mm) on TC [TO] to [Top Solder] clearance [0.238mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3228.135mil|Location2.X=3239.385mil|Location1.Y=3620.359mil|Location2.Y=3631.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3228.135mil|Location2.X=3239.385mil|Location1.Y=3620.359mil|Location2.Y=3631.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (5.8mm,39.65mm)(5.8mm,42.25mm) on TO And Pad JP1-2(6.5mm,41.65mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.426mil|Location2.X=3283.676mil|Location1.Y=3620.359mil|Location2.Y=3631.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.426mil|Location2.X=3283.676mil|Location1.Y=3620.359mil|Location2.Y=3631.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (7.2mm,39.65mm)(7.2mm,42.25mm) on TO And Pad JP1-2(6.5mm,41.65mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.564mil|Location2.X=3243.814mil|Location1.Y=3652.347mil|Location2.Y=3663.597mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.564mil|Location2.X=3243.814mil|Location1.Y=3652.347mil|Location2.Y=3663.597mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (5.8mm,42.25mm)(7.2mm,42.25mm) on TO And Pad JP1-2(6.5mm,41.65mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3228.135mil|Location2.X=3239.385mil|Location1.Y=3565.241mil|Location2.Y=3576.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3228.135mil|Location2.X=3239.385mil|Location1.Y=3565.241mil|Location2.Y=3576.491mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (5.8mm,39.65mm)(5.8mm,42.25mm) on TO And Pad JP1-1(6.5mm,40.25mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.426mil|Location2.X=3283.676mil|Location1.Y=3565.241mil|Location2.Y=3576.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.426mil|Location2.X=3283.676mil|Location1.Y=3565.241mil|Location2.Y=3576.491mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (7.2mm,39.65mm)(7.2mm,42.25mm) on TO And Pad JP1-1(6.5mm,40.25mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.564mil|Location2.X=3243.814mil|Location1.Y=3560.812mil|Location2.Y=3572.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.564mil|Location2.X=3243.814mil|Location1.Y=3560.812mil|Location2.Y=3572.062mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (5.8mm,39.65mm)(7.2mm,39.65mm) on TO And Pad JP1-1(6.5mm,40.25mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3235.28mil|Location2.X=3246.53mil|Location1.Y=3717.8mil|Location2.Y=3729.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3235.28mil|Location2.X=3246.53mil|Location1.Y=3717.8mil|Location2.Y=3729.05mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (6.119mm,44mm)(6.881mm,44mm) on TO And Pad R1-1(6.5mm,43.3mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3227.643mil|Location2.X=3238.893mil|Location1.Y=3687.288mil|Location2.Y=3698.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3227.643mil|Location2.X=3238.893mil|Location1.Y=3687.288mil|Location2.Y=3698.538mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Text "R1" (5.75mm,43mm) on TO And Pad R1-1(6.5mm,43.3mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3235.28mil|Location2.X=3246.53mil|Location1.Y=3735.517mil|Location2.Y=3746.767mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3235.28mil|Location2.X=3246.53mil|Location1.Y=3735.517mil|Location2.Y=3746.767mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (6.119mm,44mm)(6.881mm,44mm) on TO And Pad R1-2(6.5mm,44.7mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2982.564mil|Location2.Y=2993.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2982.564mil|Location2.Y=2993.814mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (43.95mm,20.15mm)(43.95mm,26.85mm) on TO And Pad U2-1(42.625mm,25.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2892.013mil|Location2.Y=2903.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2892.013mil|Location2.Y=2903.263mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (43.95mm,20.15mm)(43.95mm,26.85mm) on TO And Pad U2-2(42.625mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2801.462mil|Location2.Y=2812.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4716.816mil|Location2.X=4728.066mil|Location1.Y=2801.462mil|Location2.Y=2812.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (43.95mm,20.15mm)(43.95mm,26.85mm) on TO And Pad U2-3(42.625mm,21.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.611mil|Location2.X=4865.861mil|Location1.Y=2850.674mil|Location2.Y=2861.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.611mil|Location2.X=4865.861mil|Location1.Y=2850.674mil|Location2.Y=2861.924mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (47.05mm,20.15mm)(47.05mm,26.85mm) on TO And Pad U2-4(48.375mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2988.469mil|Location2.Y=2999.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2988.469mil|Location2.Y=2999.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (39.35mm,25.45mm)(39.35mm,25.55mm) on TO And Pad C4-2(39mm,24.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2988.469mil|Location2.Y=2999.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2988.469mil|Location2.Y=2999.719mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (38.65mm,25.45mm)(38.65mm,25.55mm) on TO And Pad C4-2(39mm,24.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=3008.154mil|Location2.Y=3019.404mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=3008.154mil|Location2.Y=3019.404mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (39.35mm,25.45mm)(39.35mm,25.55mm) on TO And Pad C4-1(39mm,26.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=3008.154mil|Location2.Y=3019.404mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=3008.154mil|Location2.Y=3019.404mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (38.65mm,25.45mm)(38.65mm,25.55mm) on TO And Pad C4-1(39mm,26.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2838.863mil|Location2.Y=2850.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2838.863mil|Location2.Y=2850.113mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (39.35mm,21.65mm)(39.35mm,21.75mm) on TO And Pad C3-2(39mm,21mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2838.863mil|Location2.Y=2850.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2838.863mil|Location2.Y=2850.113mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (38.65mm,21.65mm)(38.65mm,21.75mm) on TO And Pad C3-2(39mm,21mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2858.548mil|Location2.Y=2869.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.588mil|Location2.X=4554.838mil|Location1.Y=2858.548mil|Location2.Y=2869.798mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (39.35mm,21.65mm)(39.35mm,21.75mm) on TO And Pad C3-1(39mm,22.4mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2858.548mil|Location2.Y=2869.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4516.029mil|Location2.X=4527.279mil|Location1.Y=2858.548mil|Location2.Y=2869.798mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (38.65mm,21.65mm)(38.65mm,21.75mm) on TO And Pad C3-1(39mm,22.4mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2933.352mil|Location2.Y=2944.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2933.352mil|Location2.Y=2944.602mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (10.75mm,23.85mm)(10.85mm,23.85mm) on TO And Pad C2-2(11.5mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2905.792mil|Location2.Y=2917.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2905.792mil|Location2.Y=2917.042mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (10.75mm,23.15mm)(10.85mm,23.15mm) on TO And Pad C2-2(11.5mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3409.729mil|Location2.X=3420.979mil|Location1.Y=2933.352mil|Location2.Y=2944.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3409.729mil|Location2.X=3420.979mil|Location1.Y=2933.352mil|Location2.Y=2944.602mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (10.75mm,23.85mm)(10.85mm,23.85mm) on TO And Pad C2-1(10.1mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3409.729mil|Location2.X=3420.979mil|Location1.Y=2905.792mil|Location2.Y=2917.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3409.729mil|Location2.X=3420.979mil|Location1.Y=2905.792mil|Location2.Y=2917.042mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (10.75mm,23.15mm)(10.85mm,23.15mm) on TO And Pad C2-1(10.1mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.887mil|Location2.X=3286.137mil|Location1.Y=3102.643mil|Location2.Y=3113.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.887mil|Location2.X=3286.137mil|Location1.Y=3102.643mil|Location2.Y=3113.893mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.325mm,28.15mm)(7.425mm,28.15mm) on TO And Pad C1-2(6.675mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.887mil|Location2.X=3286.137mil|Location1.Y=3130.202mil|Location2.Y=3141.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.887mil|Location2.X=3286.137mil|Location1.Y=3130.202mil|Location2.Y=3141.452mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.325mm,28.85mm)(7.425mm,28.85mm) on TO And Pad C1-2(6.675mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.572mil|Location2.X=3305.822mil|Location1.Y=3102.643mil|Location2.Y=3113.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.572mil|Location2.X=3305.822mil|Location1.Y=3102.643mil|Location2.Y=3113.893mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.325mm,28.15mm)(7.425mm,28.15mm) on TO And Pad C1-1(8.075mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.572mil|Location2.X=3305.822mil|Location1.Y=3130.202mil|Location2.Y=3141.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.572mil|Location2.X=3305.822mil|Location1.Y=3130.202mil|Location2.Y=3141.452mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.325mm,28.85mm)(7.425mm,28.85mm) on TO And Pad C1-1(8.075mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.292mil|Location2.X=3640.959mil|Location1.Y=3177.154mil|Location2.Y=3184.82mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.292mil|Location2.X=3640.959mil|Location1.Y=3177.154mil|Location2.Y=3184.82mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "J2" (13.644mm,28.854mm) on TO And Pad U3-18(16.595mm,30.99mm) on TC [TO] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3603.302mil|Location2.X=3610.968mil|Location1.Y=3192.147mil|Location2.Y=3199.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3603.302mil|Location2.X=3610.968mil|Location1.Y=3192.147mil|Location2.Y=3199.814mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "J2" (13.644mm,28.854mm) on TO And Pad U3-17(15.325mm,30.99mm) on TC [TO] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3553.318mil|Location2.X=3560.984mil|Location1.Y=3192.147mil|Location2.Y=3199.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3553.318mil|Location2.X=3560.984mil|Location1.Y=3192.147mil|Location2.Y=3199.814mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "J2" (13.644mm,28.854mm) on TO And Pad U3-16(14.055mm,30.99mm) on TC [TO] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4075.576mil|Location2.X=4086.826mil|Location1.Y=3098.706mil|Location2.Y=3109.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4075.576mil|Location2.X=4086.826mil|Location1.Y=3098.706mil|Location2.Y=3109.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (27.6mm,27.8mm)(27.6mm,29.2mm) on TO And Pad JP2-2(27mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4054.838mil|Location1.Y=3094.276mil|Location2.Y=3105.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4054.838mil|Location1.Y=3094.276mil|Location2.Y=3105.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (25mm,27.8mm)(27.6mm,27.8mm) on TO And Pad JP2-2(27mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4054.838mil|Location1.Y=3138.568mil|Location2.Y=3149.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4054.838mil|Location1.Y=3138.568mil|Location2.Y=3149.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (25mm,29.2mm)(27.6mm,29.2mm) on TO And Pad JP2-2(27mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3984.04mil|Location2.X=3995.29mil|Location1.Y=3098.706mil|Location2.Y=3109.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3984.04mil|Location2.X=3995.29mil|Location1.Y=3098.706mil|Location2.Y=3109.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (25mm,27.8mm)(25mm,29.2mm) on TO And Pad JP2-1(25.6mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.47mil|Location2.X=3999.72mil|Location1.Y=3094.276mil|Location2.Y=3105.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.47mil|Location2.X=3999.72mil|Location1.Y=3094.276mil|Location2.Y=3105.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (25mm,27.8mm)(27.6mm,27.8mm) on TO And Pad JP2-1(25.6mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.47mil|Location2.X=3999.72mil|Location1.Y=3138.568mil|Location2.Y=3149.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.47mil|Location2.X=3999.72mil|Location1.Y=3138.568mil|Location2.Y=3149.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.225mm &lt; 0.254mm) Between Track (25mm,29.2mm)(27.6mm,29.2mm) on TO And Pad JP2-1(25.6mm,28.5mm) on TC [TO] to [Top Solder] clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4671.048mil|Location2.X=4682.298mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4671.048mil|Location2.X=4682.298mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (42.587mm,44.45mm)(42.587mm,44.55mm) on TO And Pad C7-2(42.237mm,43.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4643.489mil|Location2.X=4654.739mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4643.489mil|Location2.X=4654.739mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (41.887mm,44.45mm)(41.887mm,44.55mm) on TO And Pad C7-2(42.237mm,43.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4671.048mil|Location2.X=4682.298mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4671.048mil|Location2.X=4682.298mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (42.587mm,44.45mm)(42.587mm,44.55mm) on TO And Pad C7-1(42.237mm,45.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4643.489mil|Location2.X=4654.739mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4643.489mil|Location2.X=4654.739mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (41.887mm,44.45mm)(41.887mm,44.55mm) on TO And Pad C7-1(42.237mm,45.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.43mil|Location2.X=3314.68mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.43mil|Location2.X=3314.68mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.85mm,47.75mm)(7.85mm,47.85mm) on TO And Pad C6-2(7.5mm,47.1mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3275.871mil|Location2.X=3287.121mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3275.871mil|Location2.X=3287.121mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.15mm,47.75mm)(7.15mm,47.85mm) on TO And Pad C6-2(7.5mm,47.1mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.43mil|Location2.X=3314.68mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.43mil|Location2.X=3314.68mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.85mm,47.75mm)(7.85mm,47.85mm) on TO And Pad C6-1(7.5mm,48.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3275.871mil|Location2.X=3287.121mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3275.871mil|Location2.X=3287.121mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (7.15mm,47.75mm)(7.15mm,47.85mm) on TO And Pad C6-1(7.5mm,48.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3224.69mil|Location2.X=3235.94mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3224.69mil|Location2.X=3235.94mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (5.85mm,47.75mm)(5.85mm,47.85mm) on TO And Pad C5-2(5.5mm,47.1mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3197.131mil|Location2.X=3208.381mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3197.131mil|Location2.X=3208.381mil|Location1.Y=3866.422mil|Location2.Y=3877.672mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (5.15mm,47.75mm)(5.15mm,47.85mm) on TO And Pad C5-2(5.5mm,47.1mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3224.69mil|Location2.X=3235.94mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3224.69mil|Location2.X=3235.94mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (5.85mm,47.75mm)(5.85mm,47.85mm) on TO And Pad C5-1(5.5mm,48.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3197.131mil|Location2.X=3208.381mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3197.131mil|Location2.X=3208.381mil|Location1.Y=3886.107mil|Location2.Y=3897.357mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (5.15mm,47.75mm)(5.15mm,47.85mm) on TO And Pad C5-1(5.5mm,48.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4573.863mil|Location2.X=4585.113mil|Location1.Y=3243.391mil|Location2.Y=3254.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4573.863mil|Location2.X=4585.113mil|Location1.Y=3243.391mil|Location2.Y=3254.641mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (40.119mm,31.5mm)(40.881mm,31.5mm) on TO And Pad R4-1(40.5mm,32.2mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4573.863mil|Location2.X=4585.113mil|Location1.Y=3225.674mil|Location2.Y=3236.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4573.863mil|Location2.X=4585.113mil|Location1.Y=3225.674mil|Location2.Y=3236.924mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (40.119mm,31.5mm)(40.881mm,31.5mm) on TO And Pad R4-2(40.5mm,30.8mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4909.729mil|Location2.X=4920.979mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4909.729mil|Location2.X=4920.979mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (48.65mm,44.45mm)(48.65mm,44.55mm) on TO And Pad C8-2(48.3mm,43.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.17mil|Location2.X=4893.42mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.17mil|Location2.X=4893.42mil|Location1.Y=3736.501mil|Location2.Y=3747.751mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (47.95mm,44.45mm)(47.95mm,44.55mm) on TO And Pad C8-2(48.3mm,43.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4909.729mil|Location2.X=4920.979mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4909.729mil|Location2.X=4920.979mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (48.65mm,44.45mm)(48.65mm,44.55mm) on TO And Pad C8-1(48.3mm,45.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.17mil|Location2.X=4893.42mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.17mil|Location2.X=4893.42mil|Location1.Y=3756.186mil|Location2.Y=3767.436mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (47.95mm,44.45mm)(47.95mm,44.55mm) on TO And Pad C8-1(48.3mm,45.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3335.123mil|Location2.Y=3346.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3335.123mil|Location2.Y=3346.373mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (29.119mm,33.83mm)(29.881mm,33.83mm) on TO And Pad R3-1(29.5mm,34.53mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3317.407mil|Location2.Y=3328.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3317.407mil|Location2.Y=3328.657mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (29.119mm,33.83mm)(29.881mm,33.83mm) on TO And Pad R3-2(29.5mm,33.13mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4141.135mil|Location2.X=4148.802mil|Location1.Y=3398.23mil|Location2.Y=3405.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4141.135mil|Location2.X=4148.802mil|Location1.Y=3398.23mil|Location2.Y=3405.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R3" (29.032mm,35.612mm) on TO And Pad R2-1(29.5mm,35.8mm) on TC [TO] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3422.525mil|Location2.Y=3433.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3422.525mil|Location2.Y=3433.775mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (29.119mm,36.5mm)(29.881mm,36.5mm) on TO And Pad R2-1(29.5mm,35.8mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3440.241mil|Location2.Y=3451.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3440.241mil|Location2.Y=3451.491mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (29.119mm,36.5mm)(29.881mm,36.5mm) on TO And Pad R2-2(29.5mm,37.2mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.973mil|Location2.X=4703.223mil|Location1.Y=3225.674mil|Location2.Y=3236.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.973mil|Location2.X=4703.223mil|Location1.Y=3225.674mil|Location2.Y=3236.924mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (43.119mm,31.5mm)(43.881mm,31.5mm) on TO And Pad R5-1(43.5mm,30.8mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.973mil|Location2.X=4703.223mil|Location1.Y=3243.391mil|Location2.Y=3254.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4691.973mil|Location2.X=4703.223mil|Location1.Y=3243.391mil|Location2.Y=3254.641mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Track (43.119mm,31.5mm)(43.881mm,31.5mm) on TO And Pad R5-2(43.5mm,32.2mm) on TC [TO] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2801.462mil|Location2.Y=2812.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2801.462mil|Location2.Y=2812.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (6.05mm,20.15mm)(6.05mm,26.85mm) on TO And Pad U1-1(7.375mm,21.2mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2892.013mil|Location2.Y=2903.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2892.013mil|Location2.Y=2903.263mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (6.05mm,20.15mm)(6.05mm,26.85mm) on TO And Pad U1-2(7.375mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2982.564mil|Location2.Y=2993.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3240.438mil|Location2.X=3251.688mil|Location1.Y=2982.564mil|Location2.Y=2993.814mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (6.05mm,20.15mm)(6.05mm,26.85mm) on TO And Pad U1-3(7.375mm,25.8mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.643mil|Location2.X=3113.893mil|Location1.Y=2850.674mil|Location2.Y=2861.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.643mil|Location2.X=3113.893mil|Location1.Y=2850.674mil|Location2.Y=2861.924mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Track (2.95mm,20.15mm)(2.95mm,26.85mm) on TO And Pad U1-4(1.625mm,23.5mm) on TC [TO] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4593.046mil|Location2.X=4604.296mil|Location1.Y=3559.336mil|Location2.Y=3570.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4593.046mil|Location2.X=4604.296mil|Location1.Y=3559.336mil|Location2.Y=3570.586mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.012mm &lt; 0.254mm) Between Track (40.238mm,39.75mm)(40.55mm,39.75mm) on TO And Pad U4-1(40.738mm,39.825mm) on TC [TO] to [Top Solder] clearance [0.012mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4599.484mil|Location2.X=4610.734mil|Location1.Y=3548.506mil|Location2.Y=3559.756mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4599.484mil|Location2.X=4610.734mil|Location1.Y=3548.506mil|Location2.Y=3559.756mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Text "U4" (40.02mm,38.85mm) on TO And Pad U4-1(40.738mm,39.825mm) on TC [TO] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.436mil|Location2.X=4673.686mil|Location1.Y=3559.336mil|Location2.Y=3570.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.436mil|Location2.X=4673.686mil|Location1.Y=3559.336mil|Location2.Y=3570.586mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.013mm &lt; 0.254mm) Between Track (42.425mm,39.75mm)(42.738mm,39.75mm) on TO And Pad U4-4(42.237mm,39.825mm) on TC [TO] to [Top Solder] clearance [0.013mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.436mil|Location2.X=4673.686mil|Location1.Y=3657.761mil|Location2.Y=3669.011mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.436mil|Location2.X=4673.686mil|Location1.Y=3657.761mil|Location2.Y=3669.011mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.013mm &lt; 0.254mm) Between Track (42.425mm,42.25mm)(42.738mm,42.25mm) on TO And Pad U4-5(42.237mm,42.175mm) on TC [TO] to [Top Solder] clearance [0.013mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4593.046mil|Location2.X=4604.296mil|Location1.Y=3657.761mil|Location2.Y=3669.011mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4593.046mil|Location2.X=4604.296mil|Location1.Y=3657.761mil|Location2.Y=3669.011mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.012mm &lt; 0.254mm) Between Track (40.238mm,42.25mm)(40.55mm,42.25mm) on TO And Pad U4-8(40.738mm,42.175mm) on TC [TO] to [Top Solder] clearance [0.012mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDOOPVPBOKQSWSM35W4VP5RBPDWK05I1GU5O1CJPOOHOSZBLLCUQ0G"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3217.308mil|Location2.X=3228.558mil|Location1.Y=3563.927mil|Location2.Y=3575.177mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3217.308mil|Location2.X=3228.558mil|Location1.Y=3563.927mil|Location2.Y=3575.177mil|Absolute=True">Silk To Silk Clearance Constraint: (0.225mm &lt; 0.254mm) Between Text "JP1" (5.5mm,39.7mm) on TO And Track (5.8mm,39.65mm)(5.8mm,42.25mm) on TO Silk Text to Silk Clearance [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3217.265mil|Location2.X=3228.515mil|Location1.Y=3557.823mil|Location2.Y=3570.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3217.265mil|Location2.X=3228.515mil|Location1.Y=3557.823mil|Location2.Y=3570.358mil|Absolute=True">Silk To Silk Clearance Constraint: (0.253mm &lt; 0.254mm) Between Text "JP1" (5.5mm,39.7mm) on TO And Track (5.8mm,39.65mm)(7.2mm,39.65mm) on TO Silk Text to Silk Clearance [0.253mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3422.765mil|Location2.Y=3434.015mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\medlem\Desktop\Ninja\ESP_AF\Hardware\ESP_AF\forEtch.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4140.792mil|Location2.X=4152.042mil|Location1.Y=3422.765mil|Location2.Y=3434.015mil|Absolute=True">Silk To Silk Clearance Constraint: (0.238mm &lt; 0.254mm) Between Text "R3" (29.032mm,35.612mm) on TO And Track (29.119mm,36.5mm)(29.881mm,36.5mm) on TO Silk Text to Silk Clearance [0.238mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
